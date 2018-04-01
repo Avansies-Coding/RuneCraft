@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RCFront extends JavaPlugin {
 	
 	public static File plugDir;
 	public static File config;
+	public static File playersFold;
 	
 //	For enabling the plugin
 	public void onEnable() {
@@ -31,6 +33,15 @@ public class RCFront extends JavaPlugin {
 				System.out.println(e.getMessage());
 			}
 		}
+		playersFold = new File(plugDir.getPath() + File.separator + "players");
+		if(!playersFold.exists()) {
+			playersFold.mkdir();
+		}
+		Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
+		for(Player targPlayer : Bukkit.getServer().getOnlinePlayers()) {
+			Methods.createPlayerFile(targPlayer);
+		}
+		
 	}
 	
 }
