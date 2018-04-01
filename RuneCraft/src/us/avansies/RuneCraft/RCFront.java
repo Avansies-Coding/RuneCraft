@@ -39,7 +39,9 @@ public class RCFront extends JavaPlugin {
 		}
 		Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
 		for(Player targPlayer : Bukkit.getServer().getOnlinePlayers()) {
-			Methods.createPlayerFile(targPlayer);
+			if(!Methods.hasDataFile(targPlayer)) {
+				Methods.createPlayerFile(targPlayer);
+			}
 		}
 		
 	}

@@ -3,6 +3,7 @@ package us.avansies.RuneCraft;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -17,7 +18,16 @@ public class Methods {
 		return Long.parseLong(tag);
 	}
 	
-	public static boolean createPlayerFile(Player player) {
+	public static boolean hasDataFile(Player player) {
+		for(File targFile : RCFront.playersFold.listFiles()) {
+			if(targFile.getName().substring(0, targFile.getName().length() - 4).equalsIgnoreCase(player.getUniqueId().toString())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static File createPlayerFile(Player player) {
 		String playerUUID = player.getUniqueId().toString();
 		File playerDat = new File(RCFront.playersFold + File.separator + playerUUID + ".yml");
 		if(!playerDat.exists()) {
@@ -37,9 +47,9 @@ public class Methods {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
-			return false;
+			return playerDat;
 		}
-		return true;
+		return null;
 	}
 	
 	public static boolean alreadyExists(long tag) {
