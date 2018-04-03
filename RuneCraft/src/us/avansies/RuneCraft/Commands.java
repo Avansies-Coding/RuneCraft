@@ -17,13 +17,13 @@ public class Commands implements CommandExecutor {
 		switch(cmd.getName().toLowerCase()) {
 		case "rc":
 			if(args.length < 1) {
-				sndr.sendMessage(RCFront.prefix + ChatColor.RED + " Invalid arguments. Please use /rc help for a list of commands.");
+				sndr.sendMessage(RCFront.adminPrefix + ChatColor.RED + " Invalid arguments. Please use /rc help for a list of commands.");
 				return true;
 			}
 			switch(args[0].toLowerCase()) {
 			case "selection":
 				if(args.length < 2) {
-					sndr.sendMessage(RCFront.prefix + ChatColor.RED + " Invalid arguments. Please use /rc help for a list of commands.");
+					sndr.sendMessage(RCFront.adminPrefix + ChatColor.RED + " Invalid arguments. Please use /rc help for a list of commands.");
 					return true;
 				}
 				switch(args[1].toLowerCase()) {
