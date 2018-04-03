@@ -62,14 +62,19 @@ public class Methods {
 		return false;
 	}
 	
-	public static void teleportTo(String location, Player player) {
+	public static double teleportTo(String location, Player player) {
 		YamlConfiguration conYAML = YamlConfiguration.loadConfiguration(RCFront.config);
 		Location teleLoc;
 		switch(location) {
 		case "selection":
-			teleLoc = new Location(Bukkit.getServer().getWorld((String) conYAML.get("locations.selection.world")), conYAML.getInt("locations.selection.x"), conYAML.getInt("locations.selection.y"), conYAML.getInt("locations.selection.z"), conYAML.getInt("locations.selection.pitch"), conYAML.getInt("locations.selection.yaw"));
+			int xCoord = conYAML.getInt("locations.selection.x");
+			int zCoord = conYAML.getInt("locations.selection.z");
+			double yCoord = (double) Bukkit.getServer().getWorld((String) conYAML.get("locations.selection.world")).getHighestBlockYAt(xCoord, zCoord);
+			teleLoc = new Location(Bukkit.getServer().getWorld(conYAML.getString("locations.selection.world")), (double) conYAML.getInt("locations.selection.x"), yCoord, (double) conYAML.getInt("locations.selection.z"), (float) conYAML.getInt("locations.selection.pitch"), (float) conYAML.getInt("locations.selection.yaw"));
 			player.teleport(teleLoc);
+			return yCoord;
 		}
+		return 0;
 	}
 	
 }

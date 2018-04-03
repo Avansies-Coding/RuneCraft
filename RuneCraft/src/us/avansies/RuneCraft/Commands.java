@@ -4,16 +4,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sndr, Command cmd, String label, String[] args) {
+		YamlConfiguration conYAML = YamlConfiguration.loadConfiguration(RCFront.config);
 		if(!(sndr instanceof Player)) {
 			sndr.sendMessage("This command can not be executed by console personnel. Please try again in-game.");
 			return true;
 		}
+		Player player = (Player) sndr;
 		switch(cmd.getName().toLowerCase()) {
 		case "rc":
 			if(args.length < 1) {
@@ -32,7 +35,9 @@ public class Commands implements CommandExecutor {
 					break;
 				case "tp":
 				case "teleport":
-//					Teleport player
+					double yCoord = Methods.teleportTo("selection", player);
+					player.sendMessage(RCFront.adminPrefix + ChatColor.DARK_AQUA + " Teleported to selection location.");
+					player.sendMessage(RCFront.adminPrefix + ChatColor.DARK_AQUA + " Coords: " + conYAML.getInt("locations.selection.x") + ", " + yCoord + ", " + conYAML.getInt("locations.selection.z") + ")");
 					break;
 				}
 				break;
