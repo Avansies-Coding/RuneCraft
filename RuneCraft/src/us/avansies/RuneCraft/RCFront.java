@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,6 +33,20 @@ public class RCFront extends JavaPlugin {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
+			YamlConfiguration conYAML = YamlConfiguration.loadConfiguration(config);
+			conYAML.createSection("locations");
+			conYAML.createSection("locations.selection");
+			conYAML.set("locations.selection.world", "world");
+			conYAML.set("locations.selection.x", 0);
+			conYAML.set("locations.selection.y", Bukkit.getServer().getWorld("world").getHighestBlockYAt(0, 0));
+			conYAML.set("locations.selection.z", 0);
+			conYAML.set("locations.selection.pitch", 180);
+			conYAML.set("locations.selection.yaw", 0);
+			try {
+				conYAML.save(config);
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 		playersFold = new File(plugDir.getPath() + File.separator + "players");
 		if(!playersFold.exists()) {
@@ -41,6 +56,7 @@ public class RCFront extends JavaPlugin {
 		for(Player targPlayer : Bukkit.getServer().getOnlinePlayers()) {
 			if(!Methods.hasDataFile(targPlayer)) {
 				Methods.createPlayerFile(targPlayer);
+				Methods.teleportTo("selection", targPlayer);
 			}
 		}
 		

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -59,6 +60,16 @@ public class Methods {
 			}
 		}
 		return false;
+	}
+	
+	public static void teleportTo(String location, Player player) {
+		YamlConfiguration conYAML = YamlConfiguration.loadConfiguration(RCFront.config);
+		Location teleLoc;
+		switch(location) {
+		case "selection":
+			teleLoc = new Location(Bukkit.getServer().getWorld((String) conYAML.get("locations.selection.world")), conYAML.getInt("locations.selection.x"), conYAML.getInt("locations.selection.y"), conYAML.getInt("locations.selection.z"), conYAML.getInt("locations.selection.pitch"), conYAML.getInt("locations.selection.yaw"));
+			player.teleport(teleLoc);
+		}
 	}
 	
 }

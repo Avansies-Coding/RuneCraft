@@ -10,8 +10,9 @@ public class Events implements Listener {
 	@EventHandler
 	public void onAsyncPlayerJoinEvent(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		if(Methods.hasDataFile(player)) {
+		if(!Methods.hasDataFile(player)) {
 			Methods.createPlayerFile(player);
+			Methods.teleportTo("selection", player);
 		}
 	}
 	
