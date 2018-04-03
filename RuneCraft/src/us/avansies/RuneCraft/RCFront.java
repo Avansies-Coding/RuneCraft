@@ -36,33 +36,52 @@ public class RCFront extends JavaPlugin {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
+//			Create a YamlConfiguration object out of the config file
 			YamlConfiguration conYAML = YamlConfiguration.loadConfiguration(config);
+//			Create locations section in config YAML
 			conYAML.createSection("locations");
+//			Create selection section in locations section
 			conYAML.createSection("locations.selection");
+//			Set the value of "world" in the selection section to "world"
 			conYAML.set("locations.selection.world", "world");
+//			Set the value of "x" to 0
 			conYAML.set("locations.selection.x", 0);
+//			Set the value of "y" to the y coordinate of the highest block at the coordinates of (0, 0) in the world "world"
 			conYAML.set("locations.selection.y", Bukkit.getServer().getWorld("world").getHighestBlockYAt(0, 0));
+//			Set the value of "z" to 0
 			conYAML.set("locations.selection.z", 0);
+//			Set the value of "pitch" to 180
 			conYAML.set("locations.selection.pitch", 180);
+//			Set the value of "yaw" to 0
 			conYAML.set("locations.selection.yaw", 0);
 			try {
+//				Save the configuration yaml into config.yml, via the config File object
 				conYAML.save(config);
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
 		}
+//		Set the value of playersFold to a folder within the plugin directory by the name of "players"
 		playersFold = new File(plugDir.getPath() + File.separator + "players");
+//		Check to see if the players folder exists
 		if(!playersFold.exists()) {
+//			Create a directory out of the players file
 			playersFold.mkdir();
 		}
-		Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
+//		Loop through each online player
 		for(Player targPlayer : Bukkit.getServer().getOnlinePlayers()) {
+//			Check to see if the target player of the loop has a matching data file
 			if(!Methods.hasDataFile(targPlayer)) {
+//				Create a matching data file for the target player
 				Methods.createPlayerFile(targPlayer);
+//				Teleport the player to the "selection" location specified in config.yml
 				Methods.teleportTo("selection", targPlayer);
 			}
 		}
-		
+//		Register the Events class as an event listener for this plugin
+		Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
+//		Set executor of the "/rc" command to an instance of the Commands class
+		Bukkit.getServer().getPluginCommand("rc").setExecutor(new Commands());
 	}
 	
 }

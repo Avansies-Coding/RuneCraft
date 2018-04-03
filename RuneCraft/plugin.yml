@@ -2,3 +2,7 @@ name: RuneCraft
 version: 1.0
 main: us.avansies.RuneCraft.RCFront
 author: CallMeBlind
+commands:
+ rc:
+  description: Base command for RuneCraft
+  usage: /rc <args>
