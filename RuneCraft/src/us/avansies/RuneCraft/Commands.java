@@ -1,5 +1,6 @@
 package us.avansies.RuneCraft;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -32,6 +33,9 @@ public class Commands implements CommandExecutor {
 				switch(args[1].toLowerCase()) {
 				case "info":
 //					Display info
+					int xCoord = conYAML.getInt("locations.selection.x");
+					int zCoord = conYAML.getInt("locations.selection.z");
+					player.sendMessage(RCFront.adminPrefix + ChatColor.DARK_AQUA + " Coords: " + xCoord + ", " + Bukkit.getServer().getWorld(conYAML.getString("locations.selection.world")).getHighestBlockYAt(xCoord, zCoord) + ", " + zCoord + ")");
 					break;
 				case "tp":
 				case "teleport":

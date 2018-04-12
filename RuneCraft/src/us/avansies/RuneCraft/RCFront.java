@@ -14,6 +14,7 @@ public class RCFront extends JavaPlugin {
 	public static String adminPrefix;
 	public static File plugDir;
 	public static File config;
+	public static File defaults;
 	public static File playersFold;
 	
 //	For enabling the plugin
@@ -60,6 +61,15 @@ public class RCFront extends JavaPlugin {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
+		}
+		defaults = new File(plugDir.getPath() + File.separator + "defaults.yml");
+		if(!defaults.exists()) {
+			try {
+				defaults.createNewFile();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+			Methods.setUpDefaults(defaults);
 		}
 //		Set the value of playersFold to a folder within the plugin directory by the name of "players"
 		playersFold = new File(plugDir.getPath() + File.separator + "players");
