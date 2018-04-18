@@ -102,31 +102,81 @@ public class Methods {
 	
 	public static void setUpDefaults(File defaults) {
 		YamlConfiguration defYAML = YamlConfiguration.loadConfiguration(defaults);
-		defYAML.set("total", 0);
-		defYAML.set("combat", 3);
-		defYAML.set("skills.attack", 0);
-		defYAML.set("skills.strength", 0);
-		defYAML.set("skills.defence", 0);
-		defYAML.set("skills.ranged", 0);
-		defYAML.set("skills.prayer", 0);
-		defYAML.set("skills.magic", 0);
-		defYAML.set("skills.constitution", 10);
-		defYAML.set("skills.crafting", 0);
-		defYAML.set("skills.mining", 0);
-		defYAML.set("skills.smithing", 0);
-		defYAML.set("skills.fishing", 0);
-		defYAML.set("skills.cooking", 0);
-		defYAML.set("skills.firemaking", 0);
-		defYAML.set("skills.woodcutting", 0);
-		defYAML.set("skills.runecrafting", 0);
-		defYAML.set("skills.fletching", 0);
-		defYAML.set("skills.agility", 0);
-		defYAML.set("skills.herblore", 0);
-		defYAML.set("skills.theiving", 0);
-		defYAML.set("skills.slayer", 0);
-		defYAML.set("skills.farming", 0);
-		defYAML.set("skills.hunter", 0);
-		defYAML.set("skills.summoning", 0);
+		if(!defYAML.contains("playdat.total")) {
+			defYAML.set("playdat.total", 0);
+		}
+		if(!defYAML.contains("playdat.combat")) {
+			defYAML.set("playdat.combat", 3);
+		}
+		if(!defYAML.contains("playdat.skills.attack")) {
+			defYAML.set("playdat.skills.attack", 0);
+		}
+		if(!defYAML.contains("playdat.skills.strength")) {
+			defYAML.set("playdat.skills.strength", 0);
+		}
+		if(!defYAML.contains("playdat.skills.defence")) {
+			defYAML.set("playdat.skills.defence", 0);
+		}
+		if(!defYAML.contains("playdat.skills.ranged")) {
+			defYAML.set("playdat.skills.ranged", 0);
+		}
+		if(!defYAML.contains("playdat.skills.prayer")) {
+			defYAML.set("playdat.skills.prayer", 0);
+		}
+		if(!defYAML.contains("playdat.skills.magic")) {
+			defYAML.set("playdat.skills.magic", 0);
+		}
+		if(!defYAML.contains("playdat.skills.constitution")) {
+			defYAML.set("playdat.skills.constitution", 10);
+		}
+		if(!defYAML.contains("playdat.skills.crafting")) {
+			defYAML.set("playdat.skills.crafting", 0);
+		}
+		if(!defYAML.contains("playdat.skills.mining")) {
+			defYAML.set("playdat.skills.mining", 0);
+		}
+		if(!defYAML.contains("playdat.skills.smithing")) {
+			defYAML.set("playdat.skills.smithing", 0);
+		}
+		if(!defYAML.contains("playdat.skills.fishing")) {
+			defYAML.set("playdat.skills.fishing", 0);
+		}
+		if(!defYAML.contains("playdat.skills.cooking")) {
+			defYAML.set("playdat.skills.cooking", 0);
+		}
+		if(!defYAML.contains("playdat.skills.firemaking")) {
+			defYAML.set("playdat.skills.firemaking", 0);
+		}
+		if(!defYAML.contains("playdat.skills.woodcutting")) {
+			defYAML.set("playdat.skills.woodcutting", 0);
+		}
+		if(!defYAML.contains("playdat.skills.runecrafting")) {
+			defYAML.set("playdat.skills.runecrafting", 0);
+		}
+		if(!defYAML.contains("playdat.skills.fletching")) {
+			defYAML.set("playdat.skills.fletching", 0);
+		}
+		if(!defYAML.contains("playdat.skills.agility")) {
+			defYAML.set("playdat.skills.agility", 0);
+		}
+		if(!defYAML.contains("playdat.skills.herblore")) {
+			defYAML.set("playdat.skills.herblore", 0);
+		}
+		if(!defYAML.contains("playdat.skills.theiving")) {
+			defYAML.set("playdat.skills.theiving", 0);
+		}
+		if(!defYAML.contains("playdat.skills.slayer")) {
+			defYAML.set("playdat.skills.slayer", 0);
+		}
+		if(!defYAML.contains("playdat.skills.farming")) {
+			defYAML.set("playdat.skills.farming", 0);
+		}
+		if(!defYAML.contains("playdat.skills.hunter")) {
+			defYAML.set("playdat.skills.hunter", 0);
+		}
+		if(!defYAML.contains("playdat.skills.summoning")) {
+			defYAML.set("playdat.skills.summoning", 0);
+		}
 		try {
 			defYAML.save(defaults);
 		} catch (IOException e) {
